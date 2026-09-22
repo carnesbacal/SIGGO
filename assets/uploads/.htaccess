@@ -1,0 +1,16 @@
+# ---------------------------------------------------------------------------
+#  Comprobantes que suben los usuarios (fotos, PDF y XML de facturas).
+#
+#  Se pueden VER, pero nunca EJECUTAR. Si alguien lograra subir un .php
+#  disfrazado, aquí no corre: se sirve como texto plano.
+# ---------------------------------------------------------------------------
+Options -Indexes -ExecCGI
+
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|php8|phps|pht|shtml|pl|py|cgi|sh|htaccess)$">
+    Require all denied
+</FilesMatch>
+
+# Por si el servidor no respeta el bloqueo anterior: que los trate como texto
+AddType text/plain .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .pht
+RemoveHandler .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .pht
+RemoveType .php .phtml .php3 .php4 .php5 .php7 .php8 .phps .pht

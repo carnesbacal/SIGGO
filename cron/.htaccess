@@ -1,0 +1,9 @@
+# Carpeta cron: bloquear acceso web.
+# Estos scripts solo deben correr desde la línea de comandos (cron de cPanel).
+Require all denied
+Options -Indexes
+
+<FilesMatch ".*">
+    Order deny,allow
+    Deny from all
+</FilesMatch>

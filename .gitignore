@@ -1,0 +1,30 @@
+# Credenciales: config/db.php se crea a mano en el servidor y nunca se sube
+config/db.php
+
+# Basura del sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Registros
+*.log
+error_log
+
+# Respaldos generados por la app (pesan y son datos reales)
+backups/*
+!backups/.htaccess
+!backups/.gitkeep
+
+# Comprobantes que suben los usuarios: fotos, PDF y XML de facturas
+assets/uploads/*
+!assets/uploads/.htaccess
+!assets/uploads/.gitkeep
+assets/tmp/*
+!assets/tmp/.gitkeep
+assets/avatares/*
+!assets/avatares/.gitkeep
+
+# Carpetas de trabajo que no son del sistema
+_to_delete/
+Claude outputs/
+graphify-out/

@@ -1,0 +1,4 @@
+# Los scripts de base de datos viven aquí para tenerlos versionados,
+# pero no se sirven por la web.
+Require all denied
+Options -Indexes

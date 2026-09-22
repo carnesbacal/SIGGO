@@ -1,0 +1,19 @@
+# ---------------------------------------------------------------------------
+#  SIG-GO · Reglas de la raíz del sitio
+# ---------------------------------------------------------------------------
+
+# Sin listado de directorios: nadie tiene por qué ver el árbol de archivos
+Options -Indexes
+
+# Ni archivos ocultos ni archivos de trabajo servidos por la web.
+# Aquí caen .git, .cpanel.yml, .gitignore, respaldos .sql, notas .md, etc.
+<FilesMatch "^\.|\.(sql|yml|yaml|md|ini|log|bak|old|sh)$">
+    Require all denied
+</FilesMatch>
+
+# Un par de cabeceras que no cuestan nada
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

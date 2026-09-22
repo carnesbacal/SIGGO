@@ -1,0 +1,9 @@
+# La carpeta config solo se incluye desde PHP, nunca se abre desde el navegador.
+# Aquí vive db.php con la contraseña de la base: bloqueado por completo.
+Require all denied
+Options -Indexes
+
+<FilesMatch ".*">
+    Order deny,allow
+    Deny from all
+</FilesMatch>

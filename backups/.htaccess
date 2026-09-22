@@ -1,0 +1,10 @@
+# Carpeta de respaldos: BLOQUEAR todo acceso público.
+# Los archivos solo se descargan a través de admin/backups.php, que valida
+# que el usuario sea administrador con sesión abierta.
+Require all denied
+Options -Indexes
+
+<FilesMatch ".*">
+    Order deny,allow
+    Deny from all
+</FilesMatch>

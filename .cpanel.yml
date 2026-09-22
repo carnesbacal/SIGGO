@@ -1,0 +1,22 @@
+# ---------------------------------------------------------------------------
+#  SIG-GO · Despliegue automático desde GitHub a cPanel
+#
+#  cPanel ejecuta estas tareas cada vez que se oprime "Deploy HEAD Commit"
+#  en Git Version Control (o al hacer push si el repo está en modo automático).
+#
+#  OJO con la última línea: `cp -R *` NO copia archivos que empiezan con punto,
+#  y los .htaccess son justo eso. Por eso van copiados aparte: si se quitan,
+#  la carpeta de respaldos y la de comprobantes quedan abiertas al público.
+# ---------------------------------------------------------------------------
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/carnesbacalcom/public_html/intranet.carnesbacal.com.mx/SIGGO/
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -f .htaccess $DEPLOYPATH.htaccess
+    - /bin/mkdir -p $DEPLOYPATH/backups $DEPLOYPATH/assets/uploads $DEPLOYPATH/assets/tmp $DEPLOYPATH/assets/avatares
+    - /bin/cp -f backups/.htaccess $DEPLOYPATH/backups/.htaccess
+    - /bin/cp -f cron/.htaccess $DEPLOYPATH/cron/.htaccess
+    - /bin/cp -f config/.htaccess $DEPLOYPATH/config/.htaccess
+    - /bin/cp -f assets/uploads/.htaccess $DEPLOYPATH/assets/uploads/.htaccess
+    - /bin/cp -f sql/.htaccess $DEPLOYPATH/sql/.htaccess
