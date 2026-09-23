@@ -1,6 +1,7 @@
 <?php
 /** admin/auditoria.php - Bitacora de auditoria (solo lectura) */
 require __DIR__ . '/../config/admin_helpers.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 $fu = (int) input('usuario_id');
 $fa = trim((string) input('accion'));

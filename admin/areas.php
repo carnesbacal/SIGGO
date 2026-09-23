@@ -2,6 +2,7 @@
 /** admin/areas.php - Catalogo de areas de la tienda (centros de costo) */
 require __DIR__ . '/../config/admin_helpers.php';
 require_once __DIR__ . '/../config/tema.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 if (es_post()) {
     if (!csrf_valido(input('_csrf'))) { flash_set('error','Sesión expirada, intenta de nuevo.'); header('Location: '.url('admin/areas.php')); exit; }

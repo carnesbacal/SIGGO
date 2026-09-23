@@ -2,6 +2,7 @@
 /** admin/categorias.php - Catalogo de categorias y sus subcategorias */
 require __DIR__ . '/../config/admin_helpers.php';
 require_once __DIR__ . '/../config/tema.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 $volver = url('admin/categorias.php');
 

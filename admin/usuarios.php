@@ -2,6 +2,7 @@
 /** admin/usuarios.php - Gestion de usuarios */
 require __DIR__ . '/../config/admin_helpers.php';
 require_once __DIR__ . '/../config/tema.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 $yo = (int) (usuario_actual()['id'] ?? 0);
 

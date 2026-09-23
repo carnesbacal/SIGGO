@@ -3,6 +3,7 @@
 require __DIR__ . '/../config/admin_helpers.php';
 require_once __DIR__ . '/../config/tema.php';
 require_once __DIR__ . '/../config/gastos_helpers.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 $volver = url('admin/insumos.php');
 

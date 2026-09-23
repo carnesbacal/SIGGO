@@ -5,6 +5,7 @@ require_once __DIR__ . '/../config/auth.php';
 require_once __DIR__ . '/../config/helpers.php';
 require_once __DIR__ . '/../config/admin_helpers.php';
 require_once __DIR__ . '/../config/backups_helpers.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 $u = usuario_actual();
 

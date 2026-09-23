@@ -14,7 +14,12 @@ require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/helpers.php';
 
 requerir_login();
-requerir_permiso('administrar');
+
+// OJO: aquí NO va requerir_permiso('administrar'). Lo llevaba, y como este
+// archivo también lo incluye proveedores.php, el capturista se topaba con un
+// "solo para administradores" al querer dar de alta un proveedor.
+// Ahora cada pantalla declara su propio permiso en su primera línea. Si
+// agregas una pantalla nueva bajo admin/, acuérdate de ponérselo.
 
 /**
  * Paleta de colores predefinida para selectores de color en catálogos.

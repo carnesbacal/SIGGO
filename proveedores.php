@@ -2,6 +2,16 @@
 /** proveedores.php - Catalogo de proveedores */
 require __DIR__ . '/config/admin_helpers.php';
 
+// Los proveedores no son un catálogo de administración pura: el capturista se
+// topa con uno nuevo en la caja y tiene que poder darlo de alta en ese momento.
+// Ver y guardar, sí; activar o desactivar, solo el administrador.
+$puede_ver_proveedores = tiene_permiso('administrar') || tiene_permiso('crear_solicitud');
+if (!$puede_ver_proveedores) {
+    flash_set('error', 'No tienes permiso para ver los proveedores.');
+    header('Location: ' . url('dashboard.php')); exit;
+}
+$es_admin_prov = tiene_permiso('administrar');
+
 if (es_post()) {
     if (!csrf_valido(input('_csrf'))) { flash_set('error','Sesión expirada, intenta de nuevo.'); header('Location: '.url('proveedores.php')); exit; }
     $accion = input('accion');
@@ -76,9 +86,11 @@ require __DIR__ . '/config/header.php';
             <td class="px-4 py-3">
               <div class="flex items-center justify-end gap-1">
                 <button @click='editar(<?= json_encode($r, JSON_UNESCAPED_UNICODE) ?>)' class="p-1.5 rounded-lg text-zinc-500 hover:bg-zinc-100 hover:text-rosa-700" title="Editar"><i data-lucide="pencil" class="w-4 h-4"></i></button>
+                <?php if ($es_admin_prov): ?>
                 <form method="post" class="inline"><?= csrf_input() ?><input type="hidden" name="accion" value="toggle"><input type="hidden" name="id" value="<?= (int)$r['id'] ?>">
                   <button type="submit" class="p-1.5 rounded-lg text-zinc-500 hover:bg-zinc-100 hover:text-rosa-700" title="<?= $r['activo'] ? 'Desactivar' : 'Activar' ?>"><i data-lucide="<?= $r['activo'] ? 'toggle-right' : 'toggle-left' ?>" class="w-4 h-4"></i></button>
                 </form>
+                <?php endif; ?>
               </div>
             </td>
           </tr>

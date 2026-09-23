@@ -2,6 +2,7 @@
 /** admin/catalogos.php - Formas de pago y unidades de medida */
 require __DIR__ . '/../config/admin_helpers.php';
 require_once __DIR__ . '/../config/tema.php';
+requerir_permiso('administrar');   // pantalla solo para administradores
 
 $volver = url('admin/catalogos.php');
 

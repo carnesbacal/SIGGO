@@ -1,33 +1,35 @@
 -- =====================================================================
---  SIG-GO · Base de datos limpia para producción
---  Sistema Integral de Gestión de Gastos de Operación
+--  SIG-GO · Producción · TUS CATÁLOGOS, SIN MOVIMIENTOS
 --  El Grano de Oro · Sucursal Ferias
 --
+--  CÓMO SE IMPORTA (cPanel)
+--    1. phpMyAdmin → selecciona la base de SIG-GO (la que ya creaste, con
+--       su prefijo: carnesbacalcom_...). Este archivo NO crea ninguna base.
+--    2. Pestaña Importar → este archivo → Continuar.
+--    3. Listo. config/db.php no se toca: los datos de conexión son los
+--       mismos.
+--
 --  QUÉ TRAE
---    · Toda la estructura: tablas, vistas, índices y llaves foráneas.
---    · Los catálogos ya cargados: 8 áreas, 4 categorías (Operación,
---      Servicios, Inmueble y Equipo) con 21 subcategorías, 16 unidades,
---      7 formas de pago y 27 insumos operativos.
---    · Un solo usuario: admin / SigGo2026!  (el sistema obliga a cambiar
---      la contraseña en el primer acceso).
+--    Los mismos catálogos de tu local: 4 categorías (Operación, Gastos
+--    Indirectos, Ventas y Administración) con sus 36 subcategorías,
+--    8 áreas, 27 insumos, 16 unidades, 7 formas de pago y 3 usuarios.
 --
 --  QUÉ NO TRAE
---    · Ningún gasto, proveedor, movimiento, auditoría ni respaldo.
---      La tienda empieza a capturar desde cero.
+--    Ni un solo gasto, proveedor, gasto fijo ni registro de auditoría.
+--    La tienda empieza a capturar en cero.
 --
---  CÓMO SE IMPORTA (cPanel)
---    1. MySQL® Databases → crea la base (p. ej. carnesbacalcom_siggo) y el
---       usuario, y asígnale TODOS los privilegios.
---    2. phpMyAdmin → selecciona esa base → pestaña Importar → este archivo.
---       OJO: primero selecciona la base. Este archivo NO crea ninguna.
---    3. Copia config/db.example.php a config/db.php y pon ahí el nombre de
---       la base, el usuario y la contraseña que acabas de crear.
+--  QUÉ LE PASA A LO QUE YA ESTABA
+--    El archivo borra y vuelve a crear cada tabla (DROP TABLE), así que lo
+--    que hubiera en esa base se pierde. Eso es justo lo que se busca aquí,
+--    pero si tuvieras algo que salvar, expórtalo antes.
 --
---  Si la base YA está instalada, no uses este archivo: para dejar solo las
---  cuatro categorías corre  sql/ajuste_01_categorias.sql,  que respeta lo
---  que ya se capturó.
+--  USUARIOS
+--    Van los tres de tu local: admin, lfrodriguez y ksantos, con sus
+--    contraseñas de local. A lfrodriguez y ksantos el sistema les va a
+--    pedir cambiarla en su primer acceso.
 --
---  Generado: 23/09/2026
+--  Generado desde tu respaldo local del 22/09/2026
+--  Preparado: 23/09/2026
 -- =====================================================================
 
 SET NAMES utf8mb4;
@@ -37,7 +39,7 @@ SET SQL_MODE = 'NO_AUTO_VALUE_ON_ZERO';
 /*M!999999\- enable the sandbox mode */ 
 -- MariaDB dump 10.19  Distrib 10.11.14-MariaDB, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: siggo_limpia
+-- Host: localhost    Database: local_limpia
 -- ------------------------------------------------------
 -- Server version	10.11.14-MariaDB-0ubuntu0.24.04.1
 
@@ -81,14 +83,14 @@ CREATE TABLE `areas` (
 
 /*!40000 ALTER TABLE `areas` DISABLE KEYS */;
 INSERT INTO `areas` VALUES
-(1,'General','GEN','Gastos que no se atribuyen a un área específica',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(2,'Piso de venta','PV','Sala de ventas y exhibición',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(3,'Carnicería','CAR','Mostrador de carnes y cámara fría',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(4,'Tortillería','TOR','Producción y venta de tortilla',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(5,'Abarrotes','ABA','Abarrotes y mercancía seca',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(6,'Almacén','ALM','Bodega y recepción de mercancía',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(7,'Caja','CAJ','Cajas y punto de venta',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40'),
-(8,'Administración','ADM','Oficina, administración y gerencia',NULL,NULL,1,'2026-09-15 00:08:40','2026-09-15 00:08:40');
+(1,'General','GEN','Gastos que no se atribuyen a un área específica',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(2,'Piso de venta','PV','Sala de ventas y exhibición',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(3,'Carnicería','CAR','Mostrador de carnes y cámara fría',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(4,'Tortillería','TOR','Producción y venta de tortilla',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(5,'Abarrotes','ABA','Abarrotes y mercancía seca',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(6,'Almacén','ALM','Bodega y recepción de mercancía',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(7,'Caja','CAJ','Cajas y punto de venta',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40'),
+(8,'Administración','ADM','Oficina, administración y gerencia',NULL,NULL,1,'2026-09-15 00:27:40','2026-09-15 00:27:40');
 /*!40000 ALTER TABLE `areas` ENABLE KEYS */;
 
 --
@@ -113,7 +115,7 @@ CREATE TABLE `auditoria_sistema` (
   KEY `idx_accion` (`accion`),
   KEY `idx_fecha` (`creado_en`),
   CONSTRAINT `auditoria_sistema_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +174,7 @@ CREATE TABLE `categorias_gasto` (
   `orden` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_nombre_ambito` (`nombre`,`ambito`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,10 +183,10 @@ CREATE TABLE `categorias_gasto` (
 
 /*!40000 ALTER TABLE `categorias_gasto` DISABLE KEYS */;
 INSERT INTO `categorias_gasto` VALUES
-(1,'Operación','OPE','gasto','Insumos y servicios del día a día de la tienda','#7C3AED',1,'2026-09-15 00:08:40',10),
-(2,'Servicios','SER','gasto','Luz, agua, gas, comunicaciones','#0EA5E9',1,'2026-09-15 00:08:40',20),
-(3,'Inmueble','INM','gasto','Renta, mantenimiento y conservación del local','#0D9488',1,'2026-09-15 00:08:40',30),
-(4,'Equipo','EQU','gasto','Maquinaria, refrigeración, cómputo y su mantenimiento','#F59E0B',1,'2026-09-15 00:08:40',40);
+(1,'Operación','OPE','gasto','Insumos y servicios del día a día de la tienda','#7c3aed',1,'2026-09-15 00:27:40',10),
+(2,'Gastos Indirectos','SER','gasto','Luz, agua, gas, comunicaciones','#0ea5e9',1,'2026-09-15 00:27:40',20),
+(3,'Ventas','VTA','gasto',NULL,'#0d9488',1,'2026-09-15 00:27:40',30),
+(10,'Administración',NULL,'gasto','Gastos administrativos de la sucursal','#6366F1',1,'2026-09-22 17:24:53',40);
 /*!40000 ALTER TABLE `categorias_gasto` ENABLE KEYS */;
 
 --
@@ -237,12 +239,12 @@ CREATE TABLE `configuracion` (
 
 /*!40000 ALTER TABLE `configuracion` DISABLE KEYS */;
 INSERT INTO `configuracion` VALUES
-('app_descripcion','Sistema Integral de Gestión de Gastos de Operación','2026-09-15 00:08:40'),
-('app_nombre','SIG-GO','2026-09-15 00:08:40'),
-('empresa_nombre','El Grano de Oro','2026-09-15 00:08:40'),
-('iva_default','16','2026-09-15 00:08:40'),
-('moneda','MXN','2026-09-15 00:08:40'),
-('sucursal_nombre','Sucursal Ferias','2026-09-15 00:08:40');
+('app_descripcion','Sistema Integral de Gestión de Gastos de Operación','2026-09-15 00:27:40'),
+('app_nombre','SIG-GO','2026-09-15 00:27:40'),
+('empresa_nombre','El Grano de Oro','2026-09-15 00:27:40'),
+('iva_default','16','2026-09-15 00:27:40'),
+('moneda','MXN','2026-09-15 00:27:40'),
+('sucursal_nombre','Sucursal Ferias','2026-09-15 00:27:40');
 /*!40000 ALTER TABLE `configuracion` ENABLE KEYS */;
 
 --
@@ -331,7 +333,7 @@ CREATE TABLE `gasto_adjuntos` (
   KEY `fk_adj_user` (`subido_por`),
   CONSTRAINT `fk_adj_gasto` FOREIGN KEY (`gasto_id`) REFERENCES `gastos` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_adj_user` FOREIGN KEY (`subido_por`) REFERENCES `usuarios` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -360,7 +362,7 @@ CREATE TABLE `gasto_distribucion` (
   KEY `fk_dist_area` (`area_id`),
   CONSTRAINT `fk_dist_area` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`),
   CONSTRAINT `fk_dist_gasto` FOREIGN KEY (`gasto_id`) REFERENCES `gastos` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -606,33 +608,33 @@ CREATE TABLE `insumos` (
 
 /*!40000 ALTER TABLE `insumos` DISABLE KEYS */;
 INSERT INTO `insumos` VALUES
-(1,'EMP-BOLC','Bolsa camiseta chica',1,4,7,7,NULL,NULL,1,10,NULL,'2026-09-22 23:37:31'),
-(2,'EMP-BOLM','Bolsa camiseta mediana',1,4,7,7,NULL,NULL,1,20,NULL,'2026-09-22 23:37:31'),
-(3,'EMP-BOLG','Bolsa camiseta grande',1,4,7,7,NULL,NULL,1,30,NULL,'2026-09-22 23:37:31'),
-(4,'EMP-PLAYO','Rollo de playo',1,4,9,3,NULL,NULL,1,40,NULL,'2026-09-22 23:37:31'),
-(5,'EMP-CHAR','Charola para carnicería',1,4,7,3,NULL,NULL,1,50,NULL,'2026-09-22 23:37:31'),
-(6,'EMP-BOLK','Bolsa para kilo (tortilla)',1,4,7,4,NULL,NULL,1,60,NULL,'2026-09-22 23:37:31'),
-(7,'EMP-PAPEL','Papel estraza',1,4,2,3,NULL,NULL,1,70,NULL,'2026-09-22 23:37:31'),
-(8,'PAP-ROLLO','Rollo térmico para caja',1,5,9,7,NULL,NULL,1,10,NULL,'2026-09-22 23:37:31'),
-(9,'PAP-ETIQ','Etiquetas para báscula',1,5,9,3,NULL,NULL,1,20,NULL,'2026-09-22 23:37:31'),
-(10,'PAP-PLUMA','Plumas y marcadores',1,5,1,8,NULL,NULL,1,30,NULL,'2026-09-22 23:37:31'),
-(11,'PAP-HOJAS','Hojas blancas',1,5,7,8,NULL,NULL,1,40,NULL,'2026-09-22 23:37:31'),
-(12,'PAP-CINTA','Cinta adhesiva',1,5,1,6,NULL,NULL,1,50,NULL,'2026-09-22 23:37:31'),
-(13,'LIM-CLORO','Cloro',1,2,4,1,NULL,NULL,1,10,NULL,'2026-09-22 23:37:31'),
-(14,'LIM-JABON','Jabón líquido / detergente',1,2,4,1,NULL,NULL,1,20,NULL,'2026-09-22 23:37:31'),
-(15,'LIM-JERGA','Jerga y franela',1,2,1,1,NULL,NULL,1,30,NULL,'2026-09-22 23:37:31'),
-(16,'LIM-ESCOBA','Escobas y trapeadores',1,2,1,1,NULL,NULL,1,40,NULL,'2026-09-22 23:37:31'),
-(17,'LIM-BOLBAS','Bolsa para basura',1,2,7,1,NULL,NULL,1,50,NULL,'2026-09-22 23:37:31'),
-(18,'LIM-PAPH','Papel higiénico',1,2,7,1,NULL,NULL,1,60,NULL,'2026-09-22 23:37:31'),
-(19,'LIM-GUANT','Guantes de limpieza',1,2,7,1,NULL,NULL,1,70,NULL,'2026-09-22 23:37:31'),
-(20,'LIM-DESIN','Desinfectante',1,2,4,1,NULL,NULL,1,80,NULL,'2026-09-22 23:37:31'),
-(21,'OPE-AGUA','Garrafón de agua',1,NULL,1,1,NULL,NULL,1,90,NULL,'2026-09-22 23:37:31'),
-(22,'OPE-HIELO','Hielo',1,NULL,2,3,NULL,NULL,1,100,NULL,'2026-09-22 23:37:31'),
-(23,'OPE-GASLP','Gas LP (cilindro)',2,9,1,4,NULL,NULL,1,110,NULL,'2026-09-22 23:37:31'),
-(24,'UNI-MANDIL','Mandil',1,6,1,3,NULL,NULL,1,10,NULL,'2026-09-22 23:37:31'),
-(25,'UNI-COFIA','Cofia y red para cabello',1,6,7,3,NULL,NULL,1,20,NULL,'2026-09-22 23:37:31'),
-(26,'UNI-PLAYERA','Playera de uniforme',1,6,1,2,NULL,NULL,1,30,NULL,'2026-09-22 23:37:31'),
-(27,'UNI-GUANTC','Guante de acero (corte)',1,6,1,3,NULL,NULL,1,40,NULL,'2026-09-22 23:37:31');
+(1,'EMP-BOLC','Bolsa camiseta chica',1,4,7,7,NULL,NULL,1,10,NULL,'2026-09-15 09:22:52'),
+(2,'EMP-BOLM','Bolsa camiseta mediana',1,4,7,7,NULL,NULL,1,20,NULL,'2026-09-15 09:22:52'),
+(3,'EMP-BOLG','Bolsa camiseta grande',1,4,7,7,NULL,NULL,1,30,NULL,'2026-09-15 09:22:52'),
+(4,'EMP-PLAYO','Rollo de playo',1,4,9,3,NULL,NULL,1,40,NULL,'2026-09-15 09:22:52'),
+(5,'EMP-CHAR','Charola para carnicería',1,4,7,3,NULL,NULL,1,50,NULL,'2026-09-15 09:22:52'),
+(6,'EMP-BOLK','Bolsa para kilo (tortilla)',1,4,7,4,NULL,NULL,1,60,NULL,'2026-09-15 09:22:52'),
+(7,'EMP-PAPEL','Papel estraza',1,4,2,3,NULL,NULL,1,70,NULL,'2026-09-15 09:22:52'),
+(8,'PAP-ROLLO','Rollo térmico para caja',1,5,9,7,NULL,NULL,1,10,NULL,'2026-09-15 09:22:52'),
+(9,'PAP-ETIQ','Etiquetas para báscula',1,5,9,3,NULL,NULL,1,20,NULL,'2026-09-15 09:22:52'),
+(10,'PAP-PLUMA','Plumas y marcadores',1,5,1,8,NULL,NULL,1,30,NULL,'2026-09-15 09:22:52'),
+(11,'PAP-HOJAS','Hojas blancas',1,5,7,8,NULL,NULL,1,40,NULL,'2026-09-15 09:22:52'),
+(12,'PAP-CINTA','Cinta adhesiva',1,5,1,6,NULL,NULL,1,50,NULL,'2026-09-15 09:22:52'),
+(13,'LIM-CLORO','Cloro',1,2,4,1,NULL,NULL,1,10,NULL,'2026-09-15 09:22:52'),
+(14,'LIM-JABON','Jabón líquido / detergente',1,2,4,1,NULL,NULL,1,20,NULL,'2026-09-15 09:22:52'),
+(15,'LIM-JERGA','Jerga y franela',1,2,1,1,NULL,NULL,1,30,NULL,'2026-09-15 09:22:52'),
+(16,'LIM-ESCOBA','Escobas y trapeadores',1,2,1,1,NULL,NULL,1,40,NULL,'2026-09-15 09:22:52'),
+(17,'LIM-BOLBAS','Bolsa para basura',1,2,7,1,NULL,NULL,1,50,NULL,'2026-09-15 09:22:52'),
+(18,'LIM-PAPH','Papel higiénico',1,2,7,1,NULL,NULL,1,60,NULL,'2026-09-15 09:22:52'),
+(19,'LIM-GUANT','Guantes de limpieza',1,2,7,1,NULL,NULL,1,70,NULL,'2026-09-15 09:22:52'),
+(20,'LIM-DESIN','Desinfectante',1,2,4,1,NULL,NULL,1,80,NULL,'2026-09-15 09:22:52'),
+(21,'OPE-AGUA','Garrafón de agua',1,NULL,1,1,NULL,NULL,1,90,NULL,'2026-09-15 09:22:52'),
+(22,'OPE-HIELO','Hielo',1,NULL,2,3,NULL,NULL,1,100,NULL,'2026-09-15 09:22:52'),
+(23,'OPE-GASLP','Gas LP (cilindro)',2,9,1,4,NULL,NULL,1,110,NULL,'2026-09-15 09:22:52'),
+(24,'UNI-MANDIL','Mandil',1,6,1,3,NULL,NULL,1,10,NULL,'2026-09-15 09:22:52'),
+(25,'UNI-COFIA','Cofia y red para cabello',1,6,7,3,NULL,NULL,1,20,NULL,'2026-09-15 09:22:52'),
+(26,'UNI-PLAYERA','Playera de uniforme',1,6,1,2,NULL,NULL,1,30,NULL,'2026-09-15 09:22:52'),
+(27,'UNI-GUANTC','Guante de acero (corte)',1,6,1,3,NULL,NULL,1,40,NULL,'2026-09-15 09:22:52');
 /*!40000 ALTER TABLE `insumos` ENABLE KEYS */;
 
 --
@@ -819,7 +821,7 @@ CREATE TABLE `sesiones` (
   UNIQUE KEY `uk_session_id` (`session_id`),
   KEY `idx_usuario_activa` (`usuario_id`,`activa`),
   CONSTRAINT `fk_sesion_usuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -849,7 +851,7 @@ CREATE TABLE `subcategorias_gasto` (
   UNIQUE KEY `uk_subcat_nombre` (`categoria_id`,`nombre`),
   KEY `idx_subcat_activo` (`activo`),
   CONSTRAINT `fk_subcat_categoria` FOREIGN KEY (`categoria_id`) REFERENCES `categorias_gasto` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -858,27 +860,42 @@ CREATE TABLE `subcategorias_gasto` (
 
 /*!40000 ALTER TABLE `subcategorias_gasto` DISABLE KEYS */;
 INSERT INTO `subcategorias_gasto` VALUES
-(1,1,'Seguridad','OPE-SEG',NULL,1,10,'2026-09-15 00:08:40'),
-(2,1,'Limpieza','OPE-LIM',NULL,1,20,'2026-09-15 00:08:40'),
-(3,1,'Fumigación','OPE-FUM',NULL,1,30,'2026-09-15 00:08:40'),
-(4,1,'Empaque y bolsas','OPE-EMP',NULL,1,40,'2026-09-15 00:08:40'),
-(5,1,'Papelería','OPE-PAP',NULL,1,50,'2026-09-15 00:08:40'),
-(6,1,'Uniformes','OPE-UNI',NULL,1,60,'2026-09-15 00:08:40'),
-(7,2,'Luz (CFE)','SER-LUZ',NULL,1,10,'2026-09-15 00:08:40'),
-(8,2,'Agua','SER-AGU',NULL,1,20,'2026-09-15 00:08:40'),
-(9,2,'Gas','SER-GAS',NULL,1,30,'2026-09-15 00:08:40'),
-(10,2,'Internet y teléfono','SER-TEL',NULL,1,40,'2026-09-15 00:08:40'),
-(11,2,'Recolección de basura','SER-BAS',NULL,1,50,'2026-09-15 00:08:40'),
-(12,3,'Renta','INM-REN',NULL,1,10,'2026-09-15 00:08:40'),
-(13,3,'Mantenimiento','INM-MAN',NULL,0,20,'2026-09-15 00:08:40'),
-(14,3,'Reparaciones','INM-REP',NULL,0,30,'2026-09-15 00:08:40'),
-(15,3,'Predial','INM-PRE',NULL,1,40,'2026-09-15 00:08:40'),
-(16,3,'Jardinería','INM-JAR',NULL,1,50,'2026-09-15 00:08:40'),
-(17,4,'Refrigeración','EQU-REF',NULL,1,10,'2026-09-15 00:08:40'),
-(18,4,'Básculas','EQU-BAS',NULL,1,20,'2026-09-15 00:08:40'),
-(19,4,'Maquinaria de tortillería','EQU-TOR',NULL,1,30,'2026-09-15 00:08:40'),
-(20,4,'Cómputo y punto de venta','EQU-POS',NULL,1,40,'2026-09-15 00:08:40'),
-(21,4,'Mantenimiento preventivo','EQU-PRE',NULL,0,50,'2026-09-15 00:08:40');
+(1,1,'Telefono',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(2,1,'Telefono Telcel',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(3,1,'Internet',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(4,1,'Uniformes y Eq. de Seguridad',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(5,1,'Mtto de Maq y Equipo',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(6,1,'Mtto Local',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(7,2,'Luz (CFE)','SER-LUZ',NULL,1,10,'2026-09-15 00:27:40'),
+(8,2,'Agua','SER-AGU',NULL,1,20,'2026-09-15 00:27:40'),
+(9,2,'Gas','SER-GAS',NULL,1,30,'2026-09-15 00:27:40'),
+(12,3,'Combustible y Lubricantes -Ventas',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(13,3,'Publicidad y Propaganda',NULL,NULL,1,20,'2026-09-15 00:27:40'),
+(14,3,'Comisiones Uber Eats / Rappi / Didi',NULL,NULL,1,0,'2026-09-15 00:27:40'),
+(40,1,'Renta de Local',NULL,NULL,1,0,'2026-09-17 12:37:09'),
+(41,1,'Recolección de Basura',NULL,NULL,1,0,'2026-09-21 15:22:10'),
+(42,1,'Servicio de Fumigación',NULL,NULL,1,0,'2026-09-21 15:22:24'),
+(43,1,'Gastos No deducibles',NULL,NULL,1,0,'2026-09-21 15:22:34'),
+(44,1,'Herramienta menor',NULL,NULL,1,0,'2026-09-21 15:22:44'),
+(45,1,'Recolección de Grasas y Residuos',NULL,NULL,1,0,'2026-09-21 15:22:57'),
+(46,1,'Art empaque -Operación',NULL,NULL,1,0,'2026-09-21 15:23:57'),
+(47,1,'Aseo y Limpieza -Operación',NULL,NULL,1,0,'2026-09-21 15:24:10'),
+(48,1,'Diversos gastos de operación',NULL,NULL,1,0,'2026-09-21 15:24:22'),
+(49,1,'Depreciación Gtos Operación',NULL,NULL,1,0,'2026-09-21 15:24:29'),
+(50,1,'Papeleria y Utiles',NULL,NULL,1,0,'2026-09-21 15:24:35'),
+(51,1,'Vigilancia y Seguridad',NULL,NULL,1,0,'2026-09-21 15:24:42'),
+(52,1,'Seguros y Fianzas',NULL,NULL,1,0,'2026-09-21 15:24:50'),
+(53,1,'Soporte Tecnico Eq Computo',NULL,NULL,1,0,'2026-09-21 15:25:00'),
+(54,1,'Limpieza externa',NULL,NULL,1,0,'2026-09-21 15:25:07'),
+(60,10,'Tramites y Licencias',NULL,NULL,1,10,'2026-09-22 17:29:15'),
+(61,10,'Mtto Equipo de oficina',NULL,NULL,1,20,'2026-09-22 17:29:15'),
+(62,10,'Asesoria en sistemas',NULL,NULL,1,30,'2026-09-22 17:29:15'),
+(63,10,'Mtto Equipo de Computo',NULL,NULL,1,40,'2026-09-22 17:29:15'),
+(64,10,'Diversos gastos administrativos',NULL,NULL,1,50,'2026-09-22 17:29:15'),
+(65,10,'Depreciación Gtos Admon',NULL,NULL,1,60,'2026-09-22 17:29:15'),
+(66,10,'Multas',NULL,NULL,1,70,'2026-09-22 17:29:15'),
+(67,10,'Recargos',NULL,NULL,1,80,'2026-09-22 17:29:15'),
+(68,10,'Recolección de Valores',NULL,NULL,1,90,'2026-09-22 17:29:15');
 /*!40000 ALTER TABLE `subcategorias_gasto` ENABLE KEYS */;
 
 --
@@ -896,7 +913,7 @@ CREATE TABLE `unidades_medida` (
   `orden` smallint(6) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_unidad_clave` (`clave`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -958,7 +975,7 @@ CREATE TABLE `usuarios` (
   KEY `fk_usuario_area` (`area_id`),
   CONSTRAINT `fk_usuario_area` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE SET NULL,
   CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`rol_id`) REFERENCES `roles` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -967,7 +984,9 @@ CREATE TABLE `usuarios` (
 
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT INTO `usuarios` VALUES
-(1,'admin','$2y$12$YwSecdZCWd3ncetrdwuE2OxMd0szctQVeI3G0LfRj/aqvKDRzVJSe','Administrador del Sistema',NULL,NULL,'dashboard.php',NULL,1,NULL,1,NULL,0,NULL,1,'auto',100,NULL,NULL,'2026-09-01 09:14:17','2026-09-22 23:37:41');
+(1,'admin','$2y$10$ll4es4sUQHoTCqAU2y8AJO1GAI3mTm6c2A3K1sLUfm8naaKQR4kMK','Administrador del Sistema','admin@sigap.local',NULL,'dashboard.php',NULL,1,NULL,1,'2026-09-22 17:10:35',0,NULL,0,'auto',100,NULL,NULL,'2026-09-01 09:14:17','2026-09-22 17:10:35'),
+(2,'lfrodriguez','$2y$10$TKng8AjIVBpLQbv8o7FVzewNcGLNLxcbP9d0zUMGRT/KzpIAWZmnK','Luis Fernando Rodriguez Cruz','lfrodriguez@granodeoro.com.mx',NULL,'dashboard.php',NULL,1,NULL,1,NULL,2,NULL,1,'auto',100,NULL,NULL,'2026-09-21 10:21:42','2026-09-21 14:41:18'),
+(3,'ksantos','$2y$10$L4TaCmdqNbn57oHyT6px1OlXe/iDdN5y0hDffnfrae7MmOvMkPJsW','Karina Santos',NULL,NULL,'dashboard.php',NULL,2,NULL,1,NULL,0,NULL,1,'auto',100,NULL,NULL,'2026-09-22 17:12:46','2026-09-22 17:12:46');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 --
@@ -1018,11 +1037,11 @@ SET character_set_client = utf8mb4;
 SET character_set_client = @saved_cs_client;
 
 --
--- Dumping events for database 'siggo_limpia'
+-- Dumping events for database 'local_limpia'
 --
 
 --
--- Dumping routines for database 'siggo_limpia'
+-- Dumping routines for database 'local_limpia'
 --
 
 --
@@ -1073,14 +1092,13 @@ SET character_set_client = @saved_cs_client;
 SET FOREIGN_KEY_CHECKS = 1;
 
 -- =====================================================================
---  Comprobación rápida: pega esto en la pestaña SQL de phpMyAdmin.
+--  Comprobación: pega esto en la pestaña SQL de phpMyAdmin.
 --
---  SELECT 'áreas' AS catálogo, COUNT(*) AS registros FROM areas
---  UNION ALL SELECT 'categorías', COUNT(*) FROM categorias_gasto
---  UNION ALL SELECT 'subcategorías', COUNT(*) FROM subcategorias_gasto
---  UNION ALL SELECT 'unidades', COUNT(*) FROM unidades_medida
---  UNION ALL SELECT 'formas de pago', COUNT(*) FROM formas_pago
---  UNION ALL SELECT 'insumos', COUNT(*) FROM insumos
---  UNION ALL SELECT 'usuarios', COUNT(*) FROM usuarios
---  UNION ALL SELECT 'gastos (debe dar 0)', COUNT(*) FROM gastos;
+--  SELECT c.nombre AS categoria, COUNT(s.id) AS subcategorias
+--    FROM categorias_gasto c
+--    LEFT JOIN subcategorias_gasto s ON s.categoria_id = c.id
+--   GROUP BY c.id, c.nombre ORDER BY c.orden;
+--
+--  Deben salir: Operación 21 · Gastos Indirectos 3 · Ventas 3 ·
+--  Administración 9.
 -- =====================================================================
