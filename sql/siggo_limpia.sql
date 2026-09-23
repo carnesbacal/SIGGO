@@ -5,8 +5,9 @@
 --
 --  QUÉ TRAE
 --    · Toda la estructura: tablas, vistas, índices y llaves foráneas.
---    · Los catálogos ya cargados: 8 áreas, 9 categorías, 39 subcategorías,
---      16 unidades, 7 formas de pago y 27 insumos operativos.
+--    · Los catálogos ya cargados: 8 áreas, 4 categorías (Operación,
+--      Servicios, Inmueble y Equipo) con 21 subcategorías, 16 unidades,
+--      7 formas de pago y 27 insumos operativos.
 --    · Un solo usuario: admin / SigGo2026!  (el sistema obliga a cambiar
 --      la contraseña en el primer acceso).
 --
@@ -22,7 +23,11 @@
 --    3. Copia config/db.example.php a config/db.php y pon ahí el nombre de
 --       la base, el usuario y la contraseña que acabas de crear.
 --
---  Generado: 22/09/2026
+--  Si la base YA está instalada, no uses este archivo: para dejar solo las
+--  cuatro categorías corre  sql/ajuste_01_categorias.sql,  que respeta lo
+--  que ya se capturó.
+--
+--  Generado: 23/09/2026
 -- =====================================================================
 
 SET NAMES utf8mb4;
@@ -179,12 +184,7 @@ INSERT INTO `categorias_gasto` VALUES
 (1,'Operación','OPE','gasto','Insumos y servicios del día a día de la tienda','#7C3AED',1,'2026-09-15 00:08:40',10),
 (2,'Servicios','SER','gasto','Luz, agua, gas, comunicaciones','#0EA5E9',1,'2026-09-15 00:08:40',20),
 (3,'Inmueble','INM','gasto','Renta, mantenimiento y conservación del local','#0D9488',1,'2026-09-15 00:08:40',30),
-(4,'Equipo','EQU','gasto','Maquinaria, refrigeración, cómputo y su mantenimiento','#F59E0B',1,'2026-09-15 00:08:40',40),
-(5,'Personal','PER','gasto','Nómina, viáticos y prestaciones','#16A34A',1,'2026-09-15 00:08:40',50),
-(6,'Administrativo','ADM','gasto','Honorarios, licencias, permisos y seguros','#6366F1',1,'2026-09-15 00:08:40',60),
-(7,'Vehículos','VEH','gasto','Reparto y vehículos de la sucursal','#EA580C',1,'2026-09-15 00:08:40',70),
-(8,'Mermas','MER','gasto','Producto perdido, dañado o devuelto','#DC2626',1,'2026-09-15 00:08:40',80),
-(9,'Otros','OTR','gasto','Gastos varios no clasificados','#6B7280',1,'2026-09-15 00:08:40',90);
+(4,'Equipo','EQU','gasto','Maquinaria, refrigeración, cómputo y su mantenimiento','#F59E0B',1,'2026-09-15 00:08:40',40);
 /*!40000 ALTER TABLE `categorias_gasto` ENABLE KEYS */;
 
 --
@@ -878,25 +878,7 @@ INSERT INTO `subcategorias_gasto` VALUES
 (18,4,'Básculas','EQU-BAS',NULL,1,20,'2026-09-15 00:08:40'),
 (19,4,'Maquinaria de tortillería','EQU-TOR',NULL,1,30,'2026-09-15 00:08:40'),
 (20,4,'Cómputo y punto de venta','EQU-POS',NULL,1,40,'2026-09-15 00:08:40'),
-(21,4,'Mantenimiento preventivo','EQU-PRE',NULL,0,50,'2026-09-15 00:08:40'),
-(22,5,'Nómina','PER-NOM',NULL,0,10,'2026-09-15 00:08:40'),
-(23,5,'Viáticos','PER-VIA',NULL,1,20,'2026-09-15 00:08:40'),
-(24,5,'Capacitación','PER-CAP',NULL,1,30,'2026-09-15 00:08:40'),
-(25,5,'Prestaciones','PER-PRE',NULL,1,40,'2026-09-15 00:08:40'),
-(26,5,'Comidas de personal','PER-COM',NULL,1,50,'2026-09-15 00:08:40'),
-(27,6,'Honorarios','ADM-HON',NULL,1,10,'2026-09-15 00:08:40'),
-(28,6,'Licencias y software','ADM-LIC',NULL,1,20,'2026-09-15 00:08:40'),
-(29,6,'Permisos y trámites','ADM-PER',NULL,1,30,'2026-09-15 00:08:40'),
-(30,6,'Seguros','ADM-SEG',NULL,1,40,'2026-09-15 00:08:40'),
-(31,6,'Comisiones bancarias','ADM-BAN',NULL,1,50,'2026-09-15 00:08:40'),
-(32,7,'Combustible','VEH-COM',NULL,1,10,'2026-09-15 00:08:40'),
-(33,7,'Mantenimiento','VEH-MAN',NULL,0,20,'2026-09-15 00:08:40'),
-(34,7,'Seguro','VEH-SEG',NULL,1,30,'2026-09-15 00:08:40'),
-(35,7,'Verificación','VEH-VER',NULL,1,40,'2026-09-15 00:08:40'),
-(36,8,'Merma de producto','MER-PRO',NULL,1,10,'2026-09-15 00:08:40'),
-(37,8,'Producto dañado','MER-DAN',NULL,1,20,'2026-09-15 00:08:40'),
-(38,8,'Devoluciones','MER-DEV',NULL,1,30,'2026-09-15 00:08:40'),
-(39,9,'Varios','OTR-VAR',NULL,1,10,'2026-09-15 00:08:40');
+(21,4,'Mantenimiento preventivo','EQU-PRE',NULL,0,50,'2026-09-15 00:08:40');
 /*!40000 ALTER TABLE `subcategorias_gasto` ENABLE KEYS */;
 
 --

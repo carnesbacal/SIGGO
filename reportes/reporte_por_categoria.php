@@ -12,12 +12,16 @@ $anio    = (int) (input('anio') ?: date('Y'));
 $anioAnt = $anio - 1;
 function var_pct($act, $ant) { return $ant > 0 ? (($act - $ant) / $ant) * 100 : null; }
 
-$rows = db_all("SELECT c.id, c.nombre, c.color,
+// Una categoría desactivada que ya tiene gastos SÍ aparece: si se escondiera,
+// el reporte dejaría de cuadrar con el tablero y con el detalle. Solo se
+// esconden las que nunca se usaron.
+$rows = db_all("SELECT c.id, c.nombre, c.color, c.activo,
     COALESCE((SELECT SUM(g.monto) FROM gastos g WHERE g.categoria_id=c.id AND g.anio=:a2 AND g.estatus_pago<>'cancelado'),0) AS gastado,
     COALESCE((SELECT SUM(g.monto) FROM gastos g WHERE g.categoria_id=c.id AND g.anio=:a3 AND g.estatus_pago<>'cancelado'),0) AS gastado_ant,
     COALESCE((SELECT COUNT(*)      FROM gastos g WHERE g.categoria_id=c.id AND g.anio=:a4 AND g.estatus_pago<>'cancelado'),0) AS n
   FROM categorias_gasto c
-  WHERE c.activo=1 AND c.ambito='gasto'
+  WHERE c.ambito='gasto'
+    AND (c.activo = 1 OR EXISTS (SELECT 1 FROM gastos g WHERE g.categoria_id = c.id))
   ORDER BY gastado DESC, c.orden", ['a2'=>$anio,'a3'=>$anioAnt,'a4'=>$anio]);
 
 $tg = 0.0; $tga = 0.0;
@@ -136,6 +140,10 @@ require __DIR__ . '/../config/header.php';
             <button type="button" @click="abierto=!abierto" class="inline-flex items-center gap-1.5 text-left">
               <span class="w-2.5 h-2.5 rounded-full flex-shrink-0" style="background:<?= e($r['color']) ?>"></span>
               <span class="font-medium text-zinc-800"><?= e($r['nombre']) ?></span>
+              <?php if (isset($r['activo']) && !$r['activo']): ?>
+                <span class="text-[10px] font-medium text-zinc-500 bg-zinc-100 px-1.5 py-0.5 rounded-full"
+                      title="Ya no se usa para capturar, pero conserva sus gastos">Inactiva</span>
+              <?php endif; ?>
               <?php if ($lista): ?>
                 <span class="text-[11px] text-zinc-400"><?= count($lista) ?></span>
                 <i data-lucide="chevron-down" class="w-3.5 h-3.5 text-zinc-400 transition-transform" :class="abierto && 'rotate-180'"></i>
